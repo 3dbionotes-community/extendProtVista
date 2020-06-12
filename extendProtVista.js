@@ -13,6 +13,11 @@ var update_diseases = build_variant_menu.update_diseases;
 var add_disease_menu = build_variant_menu.add_disease_menu;
 var add_evidences = require('./add_evidences');
 var add_asa_residues = require('./add_asa_residues');
+var add_em_res = require('./add_em_res');
+var add_man_cur_ppifuncmap = require('./add_man_cur_ppifuncmap');
+var add_man_cur_ligfuncmap = require('./add_man_cur_ligfuncmap');
+var add_man_cur_ligands_diamond = require('./add_man_cur_ligands_diamond');
+
 var add_binding_residues = require('./add_binding_residues');
 var add_coverage = require('./add_coverage');
 var add_sequence_coverage = require('./add_sequence_coverage');
@@ -34,24 +39,29 @@ var upgrade_fv = function(fv){
 };
 
 var extend_features =  function(features){
-        features_extended = true;
-        if(extend_features_flag){
+  features_extended = true;
+  if(extend_features_flag){
 	  add_evidences(features);
 	  add_iedb(features);
 	  add_coverage(features);
-          add_sequence_coverage(features);
+	  add_sequence_coverage(features);
 	  add_phosphosite(features);
 	  add_dbptm(features);
 	  rebuild_ptm(features);
-          add_uploaded_data(features);
-        }
+    add_uploaded_data(features);
+    add_em_res(features);
+    add_man_cur_ppifuncmap(features);
+    add_man_cur_ligfuncmap(features);
+    add_man_cur_ligands_diamond(features);
+  }
 	add_highlight(features);
 };
 
 var extend_variants = function(features){
 	add_biomuta(features);
-        add_uploaded_variants(features);
-        add_disease_menu(features);
+  add_uploaded_variants(features);
+  add_disease_menu(features);
+  // add_man_cur_variants(features);
 };
 
 module.exports = { 
