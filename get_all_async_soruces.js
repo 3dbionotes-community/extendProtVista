@@ -91,6 +91,10 @@ function get_async_data( URL, d ){
 
 function add_loading_icon(){
   $j($j(".up_pftv_buttons").get(0)).prepend("<img title=\"LOADING DATA\" id=\"annotations_loading_icon\"src=\"/images/loading_em.gif\" style=\"cursor:help;position:absolute;left:10px;top:10px;\"/>");
+    // display the icon only for 15 seconds
+    setTimeout(function(){
+      $j("#annotations_loading_icon").remove();
+    },15000);
 }
 
 function remove_loading_icon(){
@@ -113,6 +117,7 @@ var get_all_async_soruces = function(){
     //add_molprobity();
   }
   get_async_data(__allURL, __external_data);
+  remove_loading_icon();
 };
 
 module.exports = get_all_async_soruces;
